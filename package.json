@@ -1,0 +1,19 @@
+{
+  "name": "share",
+  "version": "0.0.1",
+  "description": "es6 demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suuzee/es6Demo.git"
+  },
+  "author": "ze.su",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suuzee/es6Demo/issues"
+  },
+  "homepage": "https://github.com/suuzee/es6Demo#readme"
+}
