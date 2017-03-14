@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/suuzee/es6Demo/issues"
   },
-  "homepage": "https://github.com/suuzee/es6Demo#readme"
+  "homepage": "https://github.com/suuzee/es6Demo#readme",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
 }
