@@ -2,7 +2,7 @@
 es6Demo for share
 
 #### 本地服务器
-webpack-dev-server
+`webpack-dev-server`
 
 #### 实时编译
-webpack --server
+`webpack --server`
