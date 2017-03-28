@@ -64,6 +64,19 @@ for (let i = 0; i < 5; i ++) {
 > Use single quotes '' for strings.  
 动态字符串最好使用反引号，支持多行字符串，支持变量。
 
+```javascript
+function printName (name) {
+	return 'My name is ' + name + '!';
+}
+function printName2 (name) {
+	return `My name is ${name}!!`;
+}
+console.log(printName(su));
+// My name is su!
+console.log(printName2(ze));
+// My name is ze!!
+```
+
 #### 解构赋值
 
 使用数组成员优先使用解构赋值。
@@ -75,7 +88,10 @@ const first = arr[0];
 const second = arr[1];
 
 // good
+const arr = [1, 2, 3, 4];
 const [first, second] = arr;
+console.log(`first: ${first}, second: ${second}`);
+// first: 1, second: 2
 ```
 函数的参数如果是对象的成员，优先使用解构赋值。
 ```javascript
@@ -92,7 +108,10 @@ function getFullName(obj) {
 
 // best
 function getFullName({ firstName, lastName }) {
+	return `My name is ${firstName} ${lastName}.`;
 }
+console.log(getFullName({firstName: 'su',lastName: 'ze'}));
+// My name is su ze.
 ```
 如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。
 ```javascript
@@ -111,9 +130,32 @@ const { left, right } = processInput(input);
 #### Object
 
 单行不带尾逗号，多行要带尾逗号。
+```javascript
+let obj = {
+	a: 1,
+	b: 'xx',
+	c: `xx`,
+};
+
+let name = 'suze';
+let person = {
+	name,
+	age: 23
+};
+
+```
+
 咱们都不要尾逗号，因为`sonar`检查会通不过的。
 
 添加属性用`Object.assign`;
+
+```javascript
+let obj1 = {a: {aa: 1}, b: 2};
+let obj2 = {a: {aa: 3}, c: 4};
+obj1 = Object.assign({}, obj1, obj2);
+console.log(JSON.stringify(obj1));
+// {"a":{"aa":3},"b":2,"c":4}
+```
 
 #### Array
 
@@ -158,11 +200,84 @@ const divNodes = Array.from(divs);
 
 > 使用默认值语法设置函数参数的默认值。
 
+```javascript
+let self = this;
+let boundMethod = function(...params) {
+  return method.apply(self, params);
+}
+
+let boundMethod = method.bind(this);
+
+line-height boundMethod = (...params) => method.apply(this, params);
+
+
+function concatenateAll() {
+  const args = Array.prototype.slice.call(arguments);
+  return args.join('');
+}
+function concatenateAll(...args) {
+  return args.join('');
+}
+
+function handleThings(opts) {
+  opts = opts || {};
+}
+function handleThings(opts = {}) {
+  // ...
+}
+// 写法一
+function m1({x = 0, y = 0} = {}) {
+  return [x, y];
+}
+
+// 写法二
+function m2({x, y} = { x: 0, y: 0 }) {
+  return [x, y];
+}
+
+// 函数没有参数的情况
+m1() // [0, 0]
+m2() // [0, 0]
+
+// x和y都有值的情况
+m1({x: 3, y: 8}) // [3, 8]
+m2({x: 3, y: 8}) // [3, 8]
+
+// x有值，y无值的情况
+m1({x: 3}) // [3, 0]
+m2({x: 3}) // [3, undefined]
+
+// x和y都无值的情况
+m1({}) // [0, 0];
+m2({}) // [undefined, undefined]
+
+m1({z: 3}) // [0, 0]
+m2({z: 3}) // [undefined, undefined]
+
+```
+
+
 #### Map
 
 `Map` 有内建的遍历机制。  
 到了 `ES2017` 才引入了跟`Object.keys`配套的`Object.values`和`Object.entries`
 
+
+```javascript
+let map = new Map(arr);
+
+for (let key of map.keys()) {
+  console.log(key);
+}
+
+for (let value of map.values()) {
+  console.log(value);
+}
+
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+```
 #### Class
 以前的class怎么实现的？  
 一个 `function`， 首字母大写，用 `prototype`  
@@ -215,7 +330,26 @@ class Student extends Person {
 // 不要使用通配符，这样保证模块中，有一个默认输出。
 
 如果模块只有一个输出值，就使用`export default`，如果模块有多个输出值，就不使用`export default`，不要`export default`与普通的`export`同时使用。
+``` javascript
+//a.js
+export function abc () {
+	return 'abc function from a.js';
+}
+export function bbc () {
+	return 'bbc function from a.js';
+}
+// b.js
+export default bbb () {
+	return 'bbb function from b.js';
+}
 
+// c.js
+import {abc, bbc} from 'a';
+import bbb from 'b';
+console.log(abc());
+console.log(bbc());
+console.log(bbb());
+```
 
 #### 题外话
 #### Decorator
