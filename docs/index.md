@@ -346,9 +346,9 @@ export default bbb () {
 // c.js
 import {abc, bbc} from 'a';
 import bbb from 'b';
-console.log(abc());
-console.log(bbc());
-console.log(bbb());
+console.log(abc()); // abc function from a.js
+console.log(bbc()); // bbc function from a.js
+console.log(bbb()); // bbb function from b.js
 ```
 
 #### 题外话
