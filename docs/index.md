@@ -140,7 +140,10 @@ let obj = {
 let name = 'suze';
 let person = {
 	name,
-	age: 23
+	age: 23,
+	getName () {
+		return this.name;
+	}
 };
 
 ```
@@ -201,6 +204,30 @@ const divNodes = Array.from(divs);
 > 使用默认值语法设置函数参数的默认值。
 
 ```javascript
+let app = {
+	a: 1,
+	init: function () {
+		let self = this;
+		setTimeout(this.timeoutCb.bind(this), 100);// 这是方案1
+		setTimeout(function () {
+			self.timeoutCb();
+		}, 200); // 这是方案2
+		setTimeout(() => {
+			this.timeoutCb();
+		}, 300); // 这是方案3
+	},
+	timeoutCb: function () {
+		console.log(`这是方案${this.a ++}`);
+	}
+};
+app.init();
+
+
+
+
+
+
+
 let self = this;
 let boundMethod = function(...params) {
   return method.apply(self, params);
