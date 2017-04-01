@@ -30,3 +30,5 @@ for (let p of mapObj.getEntries(m)) {
 
 console.log(Array.from(m))
 console.log(Array.from(new Set(arr)))
+
+require('@qnpm/keyboard-num')

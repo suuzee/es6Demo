@@ -46,6 +46,7 @@
     }
   },
   "dependencies": {
+    "@qnpm/keyboard-num": "0.0.5",
     "babel-polyfill": "^6.23.0",
     "core-js": "^2.4.1"
   }
